@@ -1,0 +1,498 @@
+/* css/style.css */
+
+:root {
+    --bg-color: #FAFAFA;       
+    --text-main: #333333;      
+    --text-muted: #666666;     
+    --border-color: #DCDCDC;   
+    --card-bg: #FFFFFF;        
+    --max-width: 1400px;
+    --font-header: 'Space Grotesk', -apple-system, sans-serif;
+    --font-mono: 'Fira Code', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-header);
+    line-height: 1.7;
+    padding: 0 4rem; 
+    letter-spacing: -0.01em;
+    overflow-x: hidden;
+    font-size: 1.25rem; 
+}
+
+/* ==========================================================================
+   🎬 ADVANCED ANIMATIONS ENGINE (INTRO BOOT & SCROLL INTERFACES)
+   ========================================================================== */
+
+@keyframes introFlash {
+    0% { opacity: 0; transform: translateY(25px); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes staticInitialize {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+@keyframes scrollReveal {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Sequence Delay Framework for Page Initialization */
+.animate-fade-in {
+    opacity: 0;
+    animation: introFlash 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+header { animation-delay: 0.15s; }
+.hero { animation-delay: 0.35s; }
+
+/* Modern Native Scroll-Driven Animations (Triggers seamlessly on scroll) */
+@supports (animation-timeline: view()) {
+    .skill-category, .project-card, .timeline-item {
+        animation: scrollReveal linear both;
+        animation-timeline: view();
+        animation-range: entry 5% cover 30%;
+    }
+}
+
+/* ==========================================================================
+   📐 LAYOUT COMPONENTS & COMPONENT MICRO-INTERACTIONS
+   ========================================================================== */
+
+/* --- HEADER SYSTEM --- */
+header {
+    max-width: var(--max-width);
+    margin: 4rem auto 5rem auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 3rem;
+    position: relative;
+}
+
+header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1.5px;
+    background-color: var(--text-main);
+    animation: lineInitialize 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+}
+
+.profile-img {
+    width: 65px; 
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+header:hover .profile-img {
+    transform: rotate(10deg) scale(1.05);
+}
+
+h1 {
+    font-size: 1.9rem; 
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.03em;
+}
+
+.social-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.social-icon {
+    fill: var(--text-main); 
+    opacity: 0.65;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.social-icon:hover {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.05);
+}
+
+/* --- MAIN ENVIRONMENT --- */
+main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.hero {
+    margin-bottom: 7rem;
+}
+
+.hero h2 {
+    font-size: 3.75rem; 
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 2rem;
+    letter-spacing: -0.04em;
+    color: var(--text-main);
+}
+
+.hero p {
+    font-size: 1.55rem; 
+    color: var(--text-muted);
+    max-width: 1100px;
+    margin-bottom: 3.5rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+.meta-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3.5rem;
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 3.5rem;
+}
+
+/* CTA INTERACTION ENGINE */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--text-main);
+    color: var(--bg-color);
+    padding: 1.25rem 2.5rem; 
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 2px solid var(--text-main);
+    transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                color 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.25s ease;
+}
+
+.cta-button:hover {
+    background-color: transparent;
+    color: var(--text-main);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(51, 51, 51, 0.08);
+}
+
+section {
+    margin-bottom: 7rem;
+}
+
+.section-title {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-title::before {
+    content: "//";
+    color: var(--text-main);
+}
+
+/* --- GRID MATRICES (SKILLS) --- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+    gap: 2.5rem;
+}
+
+.skill-category {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 3rem; 
+    border-radius: 4px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.4s ease, 
+                border-color 0.4s ease;
+}
+
+.skill-category:hover {
+    transform: translateY(-6px);
+    border-color: var(--text-main);
+    box-shadow: 0 12px 32px rgba(51, 51, 51, 0.04);
+}
+
+.skill-category h4 {
+    color: var(--text-main);
+    margin-bottom: 1.75rem;
+    font-size: 1.45rem;
+    font-weight: 700;
+}
+
+.skill-list {
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+}
+
+.skill-list li {
+    color: var(--text-muted);
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    transition: color 0.2s ease;
+}
+
+.skill-list li:hover {
+    color: var(--text-main);
+}
+
+.skill-list li::before {
+    content: ">";
+    color: var(--text-main);
+    font-weight: bold;
+}
+
+/* --- PROJECTS PIPELINE --- */
+.projects-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.project-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 3.5rem; 
+    border-radius: 4px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.4s ease, 
+                border-color 0.4s ease;
+}
+
+.project-card:hover {
+    transform: scale(1.005) translateY(-4px);
+    border-color: var(--text-main);
+    box-shadow: 0 16px 40px rgba(51, 51, 51, 0.06);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.75rem;
+}
+
+.project-title {
+    font-size: 1.95rem; 
+    color: var(--text-main);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.project-badges {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.badge {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.35rem 0.9rem;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.project-card:hover .badge {
+    border-color: #A0A0A0;
+}
+
+.badge.patent {
+    border-color: #333333;
+    background-color: #333333;
+    color: #FAFAFA;
+}
+
+.project-desc {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+}
+
+.project-details-list {
+    list-style: none;
+    margin-bottom: 2rem;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+}
+
+.project-details-list li {
+    margin-bottom: 0.65rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.project-details-list li::before {
+    content: "∟";
+    position: absolute;
+    left: 0;
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-family: var(--font-mono);
+    gap: 0.6rem;
+    font-weight: 700;
+    border-bottom: 2px solid var(--text-main);
+    padding-bottom: 3px;
+    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.project-link:hover {
+    color: var(--text-muted);
+    border-color: var(--text-muted);
+    transform: translateX(4px);
+}
+
+/* --- CHRONOLOGY & SPLIT RUNTIMES --- */
+.split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+}
+
+.timeline-item {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px dashed var(--border-color);
+    transition: border-color 0.3s ease;
+}
+
+.timeline-item:hover {
+    border-bottom-style: solid;
+    border-bottom-color: var(--text-main);
+}
+
+.timeline-item:last-child {
+    border-bottom: none;
+}
+
+.timeline-date {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    margin-bottom: 0.45rem;
+}
+
+.timeline-title {
+    font-size: 1.45rem;
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.timeline-sub {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+}
+
+footer {
+    max-width: var(--max-width);
+    margin: 8rem auto 5rem auto;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 3.5rem;
+    font-size: 1rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   📱 EXTENSIVE CROSS-DEVICE FLUID RESPONSIVE GRID CONFIGURATION
+   ========================================================================== */
+
+/* 💻 Pro Laptops & Displays (Under 1200px) */
+@media (max-width: 1200px) {
+    body {
+        padding: 0 2.5rem;
+        font-size: 1.15rem;
+    }
+    .hero h2 { font-size: 3.25rem; }
+    .hero p { font-size: 1.4rem; }
+    .project-title { font-size: 1.75rem; }
+    .split-layout { gap: 4rem; }
+}
+
+/* 📟 Tablets & Landscape Orientations (Under 992px) */
+@media (max-width: 992px) {
+    header { margin: 3rem auto 4rem auto; }
+    .hero h2 { font-size: 2.75rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .split-layout { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+/* 📱 Mobile Devices & Vertical Form Factors (Under 768px) */
+@media (max-width: 768px) {
+    body { 
+        padding: 0 1.5rem; 
+        font-size: 1.1rem; 
+    }
+    header { 
+        flex-direction: column; 
+        gap: 2rem; 
+        align-items: flex-start; 
+        padding-bottom: 2rem;
+    }
+    .social-links { width: 100%; justify-content: flex-start; gap: 1.5rem; }
+    .hero h2 { font-size: 2.35rem; line-height: 1.2; }
+    .hero p { font-size: 1.25rem; }
+    .meta-contact { gap: 1.5rem 2.5rem; }
+    .skills-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .skill-category, .project-card { padding: 2rem; }
+    .project-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .project-title { font-size: 1.5rem; }
+}
+
+/* 📳 Ultramobile Compact Interfaces (Under 480px) */
+@media (max-width: 480px) {
+    body { padding: 0 1rem; }
+    h1 { font-size: 1.45rem; }
+    .hero h2 { font-size: 1.95rem; }
+    .meta-contact { font-size: 0.85rem; }
+    .cta-button { width: 100%; justify-content: center; padding: 1.1rem 1.5rem; }
+    .timeline-title { font-size: 1.25rem; }
+}
