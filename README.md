@@ -1,27 +1,27 @@
-# Software Engineering Portfolio | Joseph Kothapalli
+# AI/ML & Edge Computing Portfolio | Joseph Kothapalli
 
-> **Disclaimer:** This is my own personal engineering portfolio. You are welcome to download and edit this codebase for your own projects; however, I am not responsible for any modifications, deployment errors, or subsequent use of this software.
+> **Disclaimer:** This is my personal engineering portfolio. You are welcome to fork and adapt this codebase for your own portfolio needs; however, I assume no responsibility for downstream modifications, deployment configurations, or third-party usage.
 
 ---
 
 ## 🛠️ Project Architecture Overview
 
-This project is built using a professional, production-ready modular architecture that decouples structural layouts from core content. This avoids hardcoding variables and makes it highly scalable across platforms.
+This project implements a decoupled, modular front-end architecture that isolates site layout and design from runtime data. By keeping content out of the HTML markup, the interface scales cleanly across platforms without hardcoded dependencies.
 
 ### 📂 Directory & File Matrix
-* **`index.html`**: The main structural skeleton and semantic landing hub of the interface. It handles document loading, parses third-party dependencies, and links to global styles.
-* **`css/style.css`**: The design system matrix. It processes layout boundaries using fluid responsive breakpoints and houses hardware-inspired CSS animations (such as the initial sequence slide-in and scroll-driven entry reveals).
-* **`js/main.js`**: The operational DOM orchestrator. It pulls configuration data dynamically from memory, handles runtime string parsing, and systematically injects modular component structures into the HTML view.
-* **`updates/data.js`**: **The central repository data engine.** This isolated object holds your exact text assets, bio scripts, project stacks (including your Filed Patent, CodeFusion TRNG, Linkd CLI, and QR System metrics), and hyperlinks.
-* **`img/`**: Stores local asset files such as `profile.png`.
-* **`LICENSE`**: The official MIT License providing open-source compliance credentials.
+* **`index.html`**: The semantic skeleton and landing hub. Manages document metadata, assets, third-party libraries, and the root DOM nodes.
+* **`css/style.css`**: Design system and hardware-inspired aesthetics. Implements fluid responsive breakpoints, glassmorphism layers, and scroll-driven entry animations.
+* **`js/main.js`**: Dynamic DOM rendering engine. Ingests structured objects from memory, runs sanitization and string interpolation, and mounts UI sections dynamically.
+* **`updates/data.js`**: **Central data engine.** Houses all profile summaries, patents (such as the published Intruder Detection System and Driver Drowsiness units), R&D lab records, hackathon awards, and Edge AI/ML project stacks (Aditya-L1 flare pipeline, TRNG, and waste sorting systems).
+* **`img/`**: Stores static media, project schematics, diagrams, and profile assets (`profile.png`).
+* **`LICENSE`**: MIT open-source license.
 
 ---
 
-## ⚡ Workflow & Data Updates
+## ⚡ Workflow & Content Updates
 
-Because the layout and data layers are entirely separated, updating your portfolio values never risks breaking your active UI design:
+Because content is decoupled from presentation, updating resume metrics never impacts the responsive CSS grids or DOM routines:
 
-1. Open `updates/data.js` in your code editor.
-2. Edit or add records to the corresponding properties inside the `PORTFOLIO_DATA` master configuration block (e.g., changing text lines, updating project details, or adding links).
-3. Save the file. The main JavaScript engine reads the modified strings and updates your live landing environment instantly.
+1. Open `updates/data.js` in your editor.
+2. Edit or append entries to the `PORTFOLIO_DATA` object—including `biography`, `experience`, `patents`, `technicalMatrix`, `projects`, and `accreditation`.
+3. Save the file. The client-side parser in `js/main.js` will automatically read the updated arrays and render the revised content upon reload.
